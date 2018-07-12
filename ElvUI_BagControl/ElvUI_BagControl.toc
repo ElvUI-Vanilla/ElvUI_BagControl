@@ -1,4 +1,4 @@
-## Interface: 30300
+## Interface: 11200
 ## Author: Doc309
 ## Version: 2.1
 ## Title: |cffA11313E|r|cffC4C4C4lvUI|r |cffA11313B|r|cffC4C4C4ag|r |cffA11313C|r|cffC4C4C4ontrol|r

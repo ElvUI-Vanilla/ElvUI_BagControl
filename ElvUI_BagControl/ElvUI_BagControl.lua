@@ -1,13 +1,14 @@
 local E, L, V, P, G = unpack(ElvUI) --Import: Engine, Locales, PrivateDB, ProfileDB, GlobalDB
 local BC = E:NewModule("BagControl", "AceHook-3.0", "AceEvent-3.0", "AceTimer-3.0")
 local B = E:GetModule("Bags")
-
 local EP = LibStub("LibElvUIPlugin-1.0")
 
 --Cache global variables
 --Lua functions
+local pairs = pairs
 local format = string.format
 --WoW API / Variables
+local AUCTIONS, BUG_CATEGORY12, MAIL_LABEL, MERCHANT, TRADE = AUCTIONS, BUG_CATEGORY12, MAIL_LABEL, MERCHANT, TRADE
 local CreateFrame = CreateFrame
 
 P["BagControl"] = {

@@ -1,7 +1,7 @@
 ## Interface: 11200
 ## Author: Doc309
 ## Version: 2.1
-## Title: |cffA11313E|r|cffC4C4C4lvUI|r |cffA11313B|r|cffC4C4C4ag|r |cffA11313C|r|cffC4C4C4ontrol|r
+## Title: |cff175581E|r|cffC4C4C4lvUI|r |cff175581B|r|cffC4C4C4ag|r |cff175581C|r|cffC4C4C4ontrol|r
 ## Notes: ElvUI Plugin Framework.
 ## RequiredDeps: ElvUI
 

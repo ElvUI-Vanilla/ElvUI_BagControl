@@ -1,7 +1,7 @@
-local E, L, V, P, G = unpack(ElvUI) --Import: Engine, Locales, PrivateDB, ProfileDB, GlobalDB
-local BC = E:NewModule("BagControl", "AceHook-3.0", "AceEvent-3.0", "AceTimer-3.0")
-local B = E:GetModule("Bags")
-local EP = LibStub("LibElvUIPlugin-1.0")
+local E, L, V, P, G = unpack(ElvUI); --Import: Engine, Locales, PrivateDB, ProfileDB, GlobalDB
+local B = E:GetModule("Bags");
+local BC = E:NewModule("BagControl", "AceHook-3.0", "AceEvent-3.0", "AceTimer-3.0");
+local EP = LibStub("LibElvUIPlugin-1.0");
 
 --Cache global variables
 --Lua functions
@@ -36,13 +36,49 @@ local function ColorizeSettingName(settingName)
 end
 
 function BC:InsertOptions()
-	E.Options.args.BagControl = {
+	if not E.Options.args.elvuiPlugins then
+		E.Options.args.elvuiPlugins = {
+			order = 50,
+			type = "group",
+			name = "|cff175581E|r|cffC4C4C4lvUI_|r|cff175581P|r|cffC4C4C4lugins|r",
+			args = {
+				header = {
+					order = 0,
+					type = "header",
+					name = "|cff175581E|r|cffC4C4C4lvUI_|r|cff175581P|r|cffC4C4C4lugins|r"
+				},
+				bagControlShortcut = {
+					type = "execute",
+					name = ColorizeSettingName(L["Bag Control"]),
+					func = function()
+						if IsAddOnLoaded("ElvUI_Config") then
+							local ACD = LibStub("AceConfigDialog-3.0")
+							ACD:SelectGroup("ElvUI", "elvuiPlugins", "bagControl")
+						end
+					end
+				}
+			}
+		}
+	elseif not E.Options.args.elvuiPlugins.args.bagControlShortcut then
+		E.Options.args.elvuiPlugins.args.bagControlShortcut = {
+			type = "execute",
+			name = ColorizeSettingName(L["Bag Control"]),
+			func = function()
+				if IsAddOnLoaded("ElvUI_Config") then
+					local ACD = LibStub("AceConfigDialog-3.0")
+					ACD:SelectGroup("ElvUI", "elvuiPlugins", "bagControl")
+				end
+			end
+		}
+	end
+
+	E.Options.args.elvuiPlugins.args.bagControl = {
 		order = 53,
 		type = "group",
 		childGroups = "tab",
 		name = ColorizeSettingName(L["Bag Control"]),
 		get = function(info) return E.db.BagControl[ info[getn(info)] ] end,
-		set = function(info, value) E.db.BagControl[ info[getn(info)] ] = value; end,
+		set = function(info, value) E.db.BagControl[ info[getn(info)] ] = value end,
 		args = {
 			header = {
 				order = 1,
@@ -53,7 +89,7 @@ function BC:InsertOptions()
 				order = 2,
 				type = "toggle",
 				name = L["Enable"],
-				set = function(info, value) E.db.BagControl[ info[getn(info)] ] = value; BC:Update() end,
+				set = function(info, value) E.db.BagControl[ info[getn(info)] ] = value BC:Update() end,
 				disabled = function() return not E.bags end
 			},
 			Open = {
@@ -62,7 +98,7 @@ function BC:InsertOptions()
 				name = L["Open bags when the following windows open:"],
 				guiInline = true,
 				get = function(info) return E.db.BagControl.Open[ info[getn(info)] ] end,
-				set = function(info, value) E.db.BagControl.Open[ info[getn(info)] ] = value; end,
+				set = function(info, value) E.db.BagControl.Open[ info[getn(info)] ] = value end,
 				disabled = function() return not E.bags or not E.db.BagControl.Enabled end,
 				args = {
 					Mail = {
@@ -103,7 +139,7 @@ function BC:InsertOptions()
 				name = L["Close bags when the following windows close:"],
 				guiInline = true,
 				get = function(info) return E.db.BagControl.Close[ info[getn(info)] ] end,
-				set = function(info, value) E.db.BagControl.Close[ info[getn(info)] ] = value; end,
+				set = function(info, value) E.db.BagControl.Close[ info[getn(info)] ] = value end,
 				disabled = function() return not E.bags or not E.db.BagControl.Enabled end,
 				args = {
 					Mail = {
